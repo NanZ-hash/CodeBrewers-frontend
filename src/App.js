@@ -37,7 +37,7 @@ class App extends Component {
   setOrders = (orders) => {
     console.log(`UPDATED`)
     this.setState({ orders: [...this.state.orders] });
-    console.log(`WHAT HAPPEN M8`,this.state.orders.name)
+    console.log(`WHAT HAPPEN M8`,this.state.orders)
   }
 
 

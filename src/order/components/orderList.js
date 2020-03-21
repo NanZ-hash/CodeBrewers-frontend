@@ -1,13 +1,15 @@
 import React from 'react';
 import Order from './order';
-import {getAllOrders} from '../api'
+import Checkout from './CreatOrder'
 import {getAllMenuItems} from '../../menuItem/api'
 class OrderList extends React.Component {
       constructor (props) {
-          super(props) ; 
-
+          super(props) ;   
           
-      }
+          this.state={ 
+            total:0 ,
+                    }
+   }
     componentDidMount(){
       getAllMenuItems()
         .then((res)=> {
@@ -18,10 +20,48 @@ class OrderList extends React.Component {
         })
     }
 
+    
 
+    // createOrderList (){
+      // createOrder = order => {
+      //   // Make an axios request
+      //   addNewOrder(order)
+      //   .then(response => {
+      //   console.log(`The order ${order} has been created successfully.`);
+      //   })
+      //   .catch(error => {
+      //   console.log("API ERROR: ", error);
+      //   });
+      //   };
+  
+  //     axios.post(`${apiUrl}/api/orders`, {
+  //      order:  
+	// 	{
+	//  itemsList : this.props.order,
+  //   totalPrice : this.state.total,
+  //   discount :"0",
+  //   tax : "0",
+  //  userId : "fgdgdfg364563654564"
+  // }
+
+  //     })
+  //     .then(function (response) {
+  //     console.log(response);
+  //       })
+  //   }
+    
+
+    
 
 render() { 
     
+// only prints the price 
+var price = 0;
+        const total= this.props.orders.map((order,index)=> { 
+          const num = parseFloat(order.price) ;
+          price=price +num
+          return price;
+        })
 
 
 //for the orders 
@@ -31,38 +71,28 @@ if(this.props.orders.length > 0)
 AllOrders = this.props.orders.map((order,index)=>{
 return <Order  id = {order._id}
                totalPrice = {order.price}
-               discount = {order.name}
+               item = {order.name}
                key = {index}/>
 });
 }
 
+let checkout = this.props.orders.map((order,index)=>{
+  return <Checkout  id = {order._id}
+                 key = {index}/>
+  });
 
 
-    let allMenuItemsForOrder = <h4>No order!</h4>;
-    // If there are items in the list then display them
-    if (this.props.menuItems.length > 0) {
-      console.log("length");
-      // for the items ... 
-      allMenuItemsForOrder = this.props.menuItems.map((menuItem, index) => {
-        return (
-          <Order
-            name={menuItem.name}
-            description={menuItem.description}
-            price={menuItem.price}
-            picture={menuItem.picture}
-            category={menuItem.category}
-            id={menuItem._id}
-            deleteMenuItem={this.deleteMenuItem}
-            editItem = {this.editMenuItem}
-            key={index}
-          />
-        );
-      });
-    }
+console.log(`orderList ORDER ARRAY ${this.props.orders}`)
         return ( 
             <>
             <h3>All Orders</h3>
              {AllOrders}
+             <h4>----------------------------------------</h4>
+
+             <h2>Total : {price} </h2>
+              {checkout}
+<Checkout totalPrice={price} />
+              <p>Checkout  </p>
             </>
          );
     }

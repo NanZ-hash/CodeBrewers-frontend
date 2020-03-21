@@ -5,11 +5,11 @@ const getAllOrders = () => {
     return axios.get(`${apiUrl}/api/orders`);
   };
 
-const createOrder = () => { 
-    return axios.post(`${apiUrl}/api/orders`)
-}
- const getAllMenu = () => {
-  return axios.get(`${apiUrl}/api/menu-items`);
-};
+    // Add a new order
+ const createOrder = order => {
+  // return a promise
+  axios.post(`${apiUrl}/api/orders`, {order});
+  };
 
-export { getAllOrders , createOrder , getAllMenu}
+
+export { getAllOrders , createOrder }

@@ -44,12 +44,12 @@ class MenuItemContainer extends React.Component {
        .then(response => { 
 
         console.log ( `Step number one .. just a console `)
-      
-      const orderList = this.props.orders.push(response.data.menuItem) ; 
-      console.log(id,'<==== ID ')
+        const res = response.data.menuItem;
+        console.log(res,'<==== res ')
+      const orderList = this.props.orders.push(res) ; 
       console.log(id,'<==== ID ')
       console.log(this.props.orders)
-
+      console.log(orderList,`From menu`)
       this.props.setOrders(orderList)
       console.log(orderList,`From menu`)
        })
